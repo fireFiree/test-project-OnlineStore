@@ -6,7 +6,14 @@
     opacity: 1;
 }
 
-.phoneImageContainer{
+.phoneInfo {
+    float: left;
+    font-size: 16px;
+    margin:10px;
+}
+
+.small-phoneImageContainer{
+    float: left;
     position:relative;
     background-color:white;
     height:70px;
@@ -14,13 +21,33 @@
     margin: 0 auto;
 }
 
-.phoneImage{
+.small-phoneImage{
     position:absolute;
     top:50%;
     right:50%;
 	transform:translate(+50%,-50%);
 	max-height:70px; 
 	max-width:100px;
+}
+
+
+.big-phoneImageContainer{
+    position:relative;
+    float: left;
+    background-color:white;
+    height:200px;
+    width:150px;
+    margin: 0 auto;
+    margin:10px;
+}
+
+.big-phoneImage{
+    position:absolute;
+    top:50%;
+    right:50%;
+	transform:translate(+50%,-50%);
+	max-height:200px; 
+	max-width:150px;
 
 }
 
