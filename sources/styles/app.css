@@ -6,6 +6,24 @@
     opacity: 1;
 }
 
+.phoneImageContainer{
+    position:relative;
+    background-color:white;
+    height:70px;
+    width:100px;
+    margin: 0 auto;
+}
+
+.phoneImage{
+    position:absolute;
+    top:50%;
+    right:50%;
+	transform:translate(+50%,-50%);
+	max-height:70px; 
+	max-width:100px;
+
+}
+
 /*data loading status*/
 .status_good, .status_error, .status_saving{
 	text-align: center;

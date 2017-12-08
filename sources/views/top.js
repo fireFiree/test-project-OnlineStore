@@ -1,4 +1,5 @@
-import {JetView, plugins} from "webix-jet";
+import {JetView} from "webix-jet";
+import {categories} from "models/categories";
 
 
 export default class TopView extends JetView {
@@ -14,9 +15,16 @@ export default class TopView extends JetView {
 		};
 
 		const tree = {view: "tree",
-			url: "./models/phones.js"
+			id: "top:catalogTree",
+			select: true,
+			maxWidth: 400,
+			on: {
+				onItemClick: function(id){
+					//let item = this.getItem(id);
+					//this.$scope.show(`./phones?filter=${item.value}`);
+				}
+			}
 		};
-
 
 		const ui = {rows: [
 			header,
@@ -26,6 +34,6 @@ export default class TopView extends JetView {
 		return ui;
 	}
 	init() {
-		this.use(plugins.Menu, "top:menu");
+		$$("top:catalogTree").parse(categories);
 	}
 }

@@ -2,14 +2,14 @@ import "./styles/app.css";
 import {JetApp} from "webix-jet";
 
 webix.ready(() => {
-	var app = new JetApp({
+	let app = new JetApp({
 		id:			APPNAME,
 		version:	VERSION,
-		start:		"/top/start"
+		start:	"/top/phones"
 	});
 	app.render();
 
-	app.attachEvent("app:error:resolve", function(name, error){
+	app.attachEvent("app:error:resolve", (name, error) => {
 		window.console.error(error);
 	});
 });
