@@ -36,4 +36,5 @@ export default class PhonesView extends JetView {
 	init() {
 		$$("phonesTable").parse(phones);
 	}
+
 }
