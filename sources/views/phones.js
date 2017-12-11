@@ -25,13 +25,12 @@ export default class PhonesView extends JetView {
 				{id: "Name", 	header: ["Name", {content: "textFilter"}], sort: "string", maxWidth: 200, fillspace: true},
 				{id: "Price", 	header: "Price", sort: "int"},
 				{id: "Rating",	header: "Rating", sort: "int"},
-				{id: "Amount",
-					header: "Amount",
-					template: "{common.amountCounter()}"},
+				{id: "Amount",	header: "Amount", template: "{common.amountCounter()}"},
 				{
 					id: "Buy",
 					header: "Buy",
-					template: "<span style='font-size:30px' class='webix_icon fa-cart-plus'></span>"}
+					template: "<span style='font-size:30px' class='webix_icon fa-cart-plus'></span>"
+				}
 			],
 			on: {
 				onItemDblClick(id) {

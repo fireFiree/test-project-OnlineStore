@@ -43,13 +43,13 @@ export default class PhoneWindowView extends JetView {
 
 		return window;
 	}
-	init() {}
 
 	show(obj) {
 		this.getRoot().show();
 		this.getRoot().queryView({name: "body"}).setValues(obj);
 		this.getRoot().queryView({name: "header"}).setValue(obj.Name);
 	}
+	
 	close() {
 		this.getRoot().hide();
 	}
