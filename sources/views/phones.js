@@ -29,13 +29,13 @@ export default class PhonesView extends JetView {
 				{
 					id: "Buy",
 					header: "Buy",
-					template: "<span style='font-size:30px' class='webix_icon fa-cart-plus'></span>"
+					template: "<span class='webix_icon fa-cart-plus bigSpan'></span>"
 				}
 			],
 			on: {
 				onItemDblClick(id) {
 					let item = this.getItem(id);
-					this.win.show(item);
+					this.$scope.win.show(item);
 				}
 			}
 		};
@@ -45,5 +45,16 @@ export default class PhonesView extends JetView {
 	init() {
 		$$("phonesTable").parse(phones);
 		this.win = this.ui(PhoneWindowView);
+
+		this.on(this.app, "categoryFiltering", (value) => {
+			let table = $$("phonesTable");
+
+			if (value !== "Phones") {
+				table.filter("#Name#", value);
+			}
+			else {
+				table.filter(() => true);
+			}
+		});
 	}
 }

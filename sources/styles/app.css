@@ -55,9 +55,15 @@
 	transform:translate(+50%,-50%);
 	max-height:200px; 
 	max-width:150px;
-
 }
 
+.bigSpan {
+    font-size: 30px;
+}
+
+.mediumSpan {
+    font-size: 20px;
+}
 /*data loading status*/
 .status_good, .status_error, .status_saving{
 	text-align: center;

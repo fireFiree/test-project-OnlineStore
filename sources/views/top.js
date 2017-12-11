@@ -20,8 +20,8 @@ export default class TopView extends JetView {
 			maxWidth: 400,
 			on: {
 				onItemClick: function(id){
-					//let item = this.getItem(id);
-					//this.$scope.show(`./phones?filter=${item.value}`);
+					let item = this.getItem(id);
+					this.$scope.app.callEvent("categoryFiltering", [item.value]);
 				}
 			}
 		};
