@@ -9,8 +9,8 @@ function phoneImage(obj) {
 
 export default class PhonesView extends JetView {
 	config() {
-
-		const phonesTable = {view: "activeDatatable",
+		const phonesTable = {
+			view: "activeDatatable",
 			id: "phonesTable",
 			rowHeight: 80,
 			activeContent: {
@@ -28,14 +28,15 @@ export default class PhonesView extends JetView {
 				{id: "Amount",
 					header: "Amount",
 					template: "{common.amountCounter()}"},
-				{id: "Buy",		header: "Buy", template: "<span style='font-size:30px' class='webix_icon fa-cart-plus'></span>"}
+				{
+					id: "Buy",
+					header: "Buy",
+					template: "<span style='font-size:30px' class='webix_icon fa-cart-plus'></span>"}
 			],
 			on: {
-				onItemDblClick: function(id){
-					alert(id);
-					var item = this.getItem(id);
-					this.$scope.win.show(item);
-
+				onItemDblClick(id) {
+					let item = this.getItem(id);
+					this.win.show(item);
 				}
 			}
 		};
@@ -45,8 +46,5 @@ export default class PhonesView extends JetView {
 	init() {
 		$$("phonesTable").parse(phones);
 		this.win = this.ui(PhoneWindowView);
-
-		this.win.show();
 	}
-
 }

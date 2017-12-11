@@ -8,8 +8,17 @@
 
 .phoneInfo {
     float: left;
-    font-size: 16px;
-    margin:10px;
+    font-size: 18px;
+    margin:20px;
+    min-width: 250px;
+}
+
+.phoneDescription {
+    position:relative;
+    float: left;
+    max-height:200px; 
+	max-width:300px;
+
 }
 
 .small-phoneImageContainer{
@@ -30,14 +39,12 @@
 	max-width:100px;
 }
 
-
 .big-phoneImageContainer{
     position:relative;
     float: left;
     background-color:white;
     height:200px;
     width:150px;
-    margin: 0 auto;
     margin:10px;
 }
 
