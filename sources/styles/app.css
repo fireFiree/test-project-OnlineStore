@@ -21,6 +21,12 @@
 
 }
 
+.declineReasonInfo {
+    font-size: 18px;
+    text-align: center;
+    padding: 10px;
+}
+
 .small-phoneImageContainer{
     float: left;
     position:relative;
@@ -59,6 +65,22 @@
 
 .bigSpan {
     font-size: 30px;
+}
+
+.preview {
+    position:absolute;
+    top:50%;
+    right:50%;
+	transform:translate(+50%,-50%);
+	max-height:250px; 
+}
+
+.previewContainer {
+    position:relative;
+    background-color:white;
+    height:250px;
+    margin:10px;
+
 }
 
 .mediumSpan {

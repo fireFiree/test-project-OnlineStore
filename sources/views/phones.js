@@ -42,8 +42,9 @@ export default class PhonesView extends JetView {
 
 		return phonesTable;
 	}
-	init() {
-		$$("phonesTable").parse(phones);
+	init(view) {
+		view.parse(phones);
+		
 		this.win = this.ui(PhoneWindowView);
 
 		this.on(this.app, "categoryFiltering", (value) => {

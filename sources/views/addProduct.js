@@ -1,0 +1,66 @@
+import {JetView} from "webix-jet";
+
+export default class AddProductView extends JetView {
+	config() {
+		const elems = [
+			{view: "text", label: "Name", name: "Name", placeholder: "Type Name", invalidMessage: "Your Name can't be Empty"},
+			{view: "text", label: "Price", name: "Price", placeholder: "Type Price", invalidMessage: "Incorrect Price"},
+			{rows: [
+				{template: "Preview", id: "preview"},
+				{
+					view: "uploader",
+					align: "right",
+                    value: "Add Image",
+                    name: "Image",
+					accept: "image/png, image/gif, image/jpg",
+					on: {
+						onBeforeFileAdd(file) {
+							let reader = new FileReader();
+							reader.onload = function (e) {
+								let url = e.target.result;
+								$$("preview").setHTML(`<div class='previewContainer'>
+                                    <img class='webix_ssheet_cimage preview' src='${url}'></img>
+                                </div>`);
+							};
+							reader.readAsDataURL(file.file);
+							return false;
+						}
+					}
+				}
+			]},
+			{},
+			{view: "button", label: "Save Product", click() { this.$scope.saveForm(); }}
+		];
+
+		const rls = {
+			Name: webix.rules.isNotEmpty,
+			Price: webix.rules.isNumber
+		};
+
+		const form = {
+			view: "form",
+			id: "addproduct:form",
+			elements: elems,
+			rules: rls,
+			autoWidth: true,
+			elementsConfig: {
+				labelWidth: 150
+			}
+		};
+
+		return form;
+	}
+	init() {
+
+	}
+
+	saveForm() {
+		let form = $$("addproduct:form");
+		if (form.validate()) {
+			webix.message("EZ");
+		}
+		else {
+			webix.message("LOSER");
+		}
+	}
+}
