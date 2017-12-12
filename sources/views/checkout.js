@@ -33,7 +33,7 @@ export default class CheckoutView extends JetView {
 		return form;
 	}
 	init() {
-		this.on(this.app, "categoryFiltering", (value) => {
+		this.on(this.app, "categoryFiltering", () => {
 			this.show("../phones");
 		});
 	}
