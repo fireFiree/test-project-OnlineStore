@@ -12,17 +12,14 @@ export default class ClientsInfoView extends JetView {
 			view: "datatable",
 			id: "clientsTable",
 			rowHeight: 60,
-            select: true,
-            //
-            //why dones't it work??
-            //
+			select: true,
 			editable: true,
 			editaction: "dblclick",
 			columns: [
 				{id: "id",	header: "#", width: 60, sort: "int"},
-				{id: "Name", header: ["Name", {content: "textFilter"}], sort: "string", width: 400},
-				{id: "Email", header: ["Email", {content: "textFilter"}], sort: "string", width: 400},
-				{id: "RegistrationDate", header: "Creating at", sort: "string", width: 250, format: webix.i18n.dateFormatStr}
+				{id: "Name", header: ["Name", {content: "textFilter"}], editor: "text", sort: "string", width: 400},
+				{id: "Email", header: ["Email", {content: "textFilter"}], editor: "text", sort: "string", width: 400},
+				{id: "RegistrationDate", header: "Creating at", editor: "date", sort: "string", width: 250, format: webix.i18n.dateFormatStr}
 			],
 			rules: rls
 		};

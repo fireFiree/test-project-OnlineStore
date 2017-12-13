@@ -46,8 +46,10 @@ export default class HistoryView extends JetView {
 			on: {
 				onItemClick(id) {
 					let item = this.getItem(id);
-					this.$scope.win.show();
-					$$("statusDecline").parse(item);
+					if (item.Status === "Declined") {
+						this.$scope.win.show();
+						$$("statusDecline").parse(item);
+					}				
 				}
 			}
 		};
