@@ -3,12 +3,12 @@ import {JetView} from "webix-jet";
 export default class CheckoutView extends JetView {
 	config() {
 		const elems = [
-			{view: "text", label: "Your Name", name: "Name", placeholder: "Type Your Name", invalidMessage: "Your Name can't be Empty"},
-			{view: "text", label: "Email", name: "Email", placeholder: "Type Your Email", invalidMessage: "Incorrect Email"},
-			{view: "text", label: "Phone", name: "Phone", placeholder: "Type Your Phone", invalidMessage: "Incorrect Phone"},
-			{view: "richselect", label: "Delivery Type", name: "DeliveryType"},
-			{view: "text", label: "Address", name: "Address", placeholder: "Type Your Address", invalidMessage: "Delivery Address can't be Empty"},
-			{view: "richselect", label: "Payment Type", name: "PaymentType"},
+			{view: "text", label: "Your Name", name: "name", placeholder: "Type Your Name", invalidMessage: "Your Name can't be Empty"},
+			{view: "text", label: "Email", name: "email", placeholder: "Type Your Email", invalidMessage: "Incorrect Email"},
+			{view: "text", label: "Phone", name: "phone", placeholder: "Type Your Phone", invalidMessage: "Incorrect Phone"},
+			{view: "richselect", label: "Delivery Type", name: "deliveryType"},
+			{view: "text", label: "Address", name: "address", placeholder: "Type Your Address", invalidMessage: "Delivery Address can't be Empty"},
+			{view: "richselect", label: "Payment Type", name: "paymentType"},
 			{view: "button", value: "Checkout", click() { this.$scope.saveForm(); }},
 			{}
 		];

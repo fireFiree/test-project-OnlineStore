@@ -9,7 +9,7 @@ export default class OrdersWindowView extends JetView {
 			elements: [
 				{view: "richselect",
 					label: "Status",
-					name: "Status",
+					name: "status",
 					options: ["In Process", "Declined"],
 					on: {onChange() {
 						if (this.getValue() === "Declined") {
@@ -19,7 +19,7 @@ export default class OrdersWindowView extends JetView {
 							$$("declineReason").hide();
 						}
 					}}},
-				{view: "text", id: "declineReason", label: "Decline Reason", name: "DeclineReason", hidden: true, placeholder: "Type The Reason", invalidMessage: "Reason can't be Empty"},
+				{view: "text", id: "declineReason", label: "Decline Reason", name: "declineReason", hidden: true, placeholder: "Type The Reason", invalidMessage: "Reason can't be Empty"},
 				{view: "button", value: "Save", click() { this.$scope.saveForm(); }}
 			],
 			rules: {

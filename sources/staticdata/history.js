@@ -1,4 +1,4 @@
 [
-    {"id": 1, "Product": "Lenovo 1","Amount": 1, "Address":"Minsk, m.st. Lenina", "Delivery": "Master", "Payment": "Card", "Status": "In Process", "OrderDate": "21-02-2017"},
-    {"id": 2, "Product": "Lenovo 2","Amount": 1, "Address":"Minsk, m.st. Lenina", "Delivery": "Master", "Payment": "Card", "Status": "Declined", "DeclineReason": "Wrong Address", "OrderDate": "21-02-2017"}
+    {"id": 1, "product": "Lenovo 1","amount": 1, "address":"Minsk, m.st. Lenina", "delivery": "Master", "payment": "Card", "status": "In Process", "orderDate": "21-02-2017"},
+    {"id": 2, "product": "Lenovo 2","amount": 1, "address":"Minsk, m.st. Lenina", "delivery": "Master", "payment": "Card", "status": "Declined", "declineReason": "Wrong Address", "orderDate": "21-02-2017"}
 ]

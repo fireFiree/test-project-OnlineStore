@@ -7,13 +7,13 @@ function bodyTemplate(obj) {
 		return;
 	}
 	let html = `<div class='big-phoneImageContainer'>
-			<img class='big-phoneImage' src='${obj.Image}'>
+			<img class='big-phoneImage' src='${obj.image}'>
 		</div>
 		<div class='phoneDescription'>
-			<span class='phoneInfo'><b>Name</b>:${obj.Name}</span>
-			<span class='phoneInfo'><b>Price</b>:${obj.Price}$</span>
+			<span class='phoneInfo'><b>Name</b>:${obj.name}</span>
+			<span class='phoneInfo'><b>Price</b>:${obj.price}$</span>
 			<span class='phoneInfo'>
-				<b>Rating</b>:${obj.Rating} 	<span class='webix_icon fa-star-o mediumSpan'></span>
+				<b>Rating</b>:${obj.rating} 	<span class='webix_icon fa-star-o mediumSpan'></span>
 			</span>
 		</div>`;
 	return html;

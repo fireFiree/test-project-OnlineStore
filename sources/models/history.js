@@ -2,10 +2,10 @@ export const history = new webix.DataCollection({
     url:"sources/staticdata/history.js",
     scheme: {
 		$init(obj) {
-			if (obj.OrderDate) { obj.OrderDate = webix.i18n.parseFormatDate(obj.OrderDate); }
+			if (obj.orderDate) { obj.orderDate = webix.i18n.parseFormatDate(obj.orderDate); }
 		},
 		$save(obj) {
-			if (obj.OrderDate) { obj.OrderDate = webix.i18n.parseFormatStr(obj.OrderDate); }
+			if (obj.orderDate) { obj.orderDate = webix.i18n.parseFormatStr(obj.orderDate); }
 		}
 	}
 });

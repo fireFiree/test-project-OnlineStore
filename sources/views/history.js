@@ -29,13 +29,13 @@ const window = {
 export default class HistoryView extends JetView {
 	config() {
 		const clmns = [
-			{id: "Product", header: ["Product", {content: "textFilter"}], width: 300, sort: "string"},
-			{id: "Amount", header: "Amount", sort: "int", width: 70},
-			{id: "Address", header: "Address", sort: "string", width: 300},
-			{id: "Delivery", header: "Delivery", sort: "string", width: 100},
-			{id: "Payment", header: "Payment", sort: "string", width: 100},
-			{id: "OrderDate", header: "Order Date", sort: "string", width: 100, format: webix.i18n.dateFormatStr},
-			{id: "Status", header: "Status", sort: "string", width: 100}
+			{id: "product", header: ["Product", {content: "textFilter"}], width: 300, sort: "string"},
+			{id: "amount", header: "Amount", sort: "int", width: 70},
+			{id: "address", header: "Address", sort: "string", width: 300},
+			{id: "delivery", header: "Delivery", sort: "string", width: 100},
+			{id: "payment", header: "Payment", sort: "string", width: 100},
+			{id: "orderDate", header: "Order Date", sort: "string", width: 100, format: webix.i18n.dateFormatStr},
+			{id: "status", header: "Status", sort: "string", width: 100}
 		];
 
 		const historyTable = {
@@ -49,7 +49,7 @@ export default class HistoryView extends JetView {
 					if (item.Status === "Declined") {
 						this.$scope.win.show();
 						$$("statusDecline").parse(item);
-					}				
+					}
 				}
 			}
 		};

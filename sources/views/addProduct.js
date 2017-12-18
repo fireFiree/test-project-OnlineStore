@@ -3,15 +3,15 @@ import {JetView} from "webix-jet";
 export default class AddProductView extends JetView {
 	config() {
 		const elems = [
-			{view: "text", label: "Name", name: "Name", placeholder: "Type Name", invalidMessage: "Your Name can't be Empty"},
-			{view: "text", label: "Price", name: "Price", placeholder: "Type Price", invalidMessage: "Incorrect Price"},
+			{view: "text", label: "Name", name: "name", placeholder: "Type Name", invalidMessage: "Your Name can't be Empty"},
+			{view: "text", label: "Price", name: "price", placeholder: "Type Price", invalidMessage: "Incorrect Price"},
 			{rows: [
 				{template: "Preview", id: "preview"},
 				{
 					view: "uploader",
 					align: "right",
-                    value: "Add Image",
-                    name: "Image",
+					value: "Add Image",
+					name: "image",
 					accept: "image/png, image/gif, image/jpg",
 					on: {
 						onBeforeFileAdd(file) {

@@ -4,7 +4,7 @@ import PhoneWindowView from "views/phoneWindow";
 import "../components/activeDatatable.js";
 
 function phoneImage(obj) {
-	return `<div class= 'small-phoneImageContainer'><img class='small-phoneImage' src='${obj.Image}'/></div>`;
+	return `<div class= 'small-phoneImageContainer'><img class='small-phoneImage' src='${obj.image}'/></div>`;
 }
 
 export default class PhonesView extends JetView {
@@ -21,11 +21,11 @@ export default class PhonesView extends JetView {
 				}
 			},
 			columns: [
-				{id: "Image",	header: "Image", template: phoneImage, width: 150},
-				{id: "Name", 	header: ["Name", {content: "textFilter"}], sort: "string", maxWidth: 200, fillspace: true},
-				{id: "Price", 	header: "Price", sort: "int"},
-				{id: "Rating",	header: "Rating", sort: "int"},
-				{id: "Amount",	header: "Amount", template: "{common.amountCounter()}"},
+				{id: "image",	header: "Image", template: phoneImage, width: 150},
+				{id: "name", 	header: ["Name", {content: "textFilter"}], sort: "string", maxWidth: 200, fillspace: true},
+				{id: "price", 	header: "Price", sort: "int"},
+				{id: "rating",	header: "Rating", sort: "int"},
+				{id: "amount",	header: "Amount", template: "{common.amountCounter()}"},
 				{
 					id: "Buy",
 					header: "Buy",
@@ -51,7 +51,7 @@ export default class PhonesView extends JetView {
 			let table = $$("phonesTable");
 
 			if (value !== "Phones") {
-				table.filter("#Name#", value);
+				table.filter("#name#", value);
 			}
 			else {
 				table.filter(() => true);
