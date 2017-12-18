@@ -8,8 +8,23 @@
 
 .phoneInfo {
     float: left;
-    font-size: 16px;
-    margin:10px;
+    font-size: 18px;
+    margin:20px;
+    min-width: 250px;
+}
+
+.phoneDescription {
+    position:relative;
+    float: left;
+    max-height:200px; 
+    max-width:300px;
+
+}
+
+.declineReasonInfo {
+    font-size: 18px;
+    text-align: center;
+    padding: 10px;
 }
 
 .small-phoneImageContainer{
@@ -30,14 +45,12 @@
 	max-width:100px;
 }
 
-
 .big-phoneImageContainer{
     position:relative;
     float: left;
     background-color:white;
     height:200px;
     width:150px;
-    margin: 0 auto;
     margin:10px;
 }
 
@@ -48,9 +61,30 @@
 	transform:translate(+50%,-50%);
 	max-height:200px; 
 	max-width:150px;
-
 }
 
+.bigSpan {
+    font-size: 30px;
+}
+
+.preview {
+    position:absolute;
+    top:50%;
+    right:50%;
+	transform:translate(+50%,-50%);
+	max-height:250px; 
+}
+
+.previewContainer {
+    position:relative;
+    background-color:white;
+    height:250px;
+    margin:10px;
+}
+
+.mediumSpan {
+    font-size: 20px;
+}
 /*data loading status*/
 .status_good, .status_error, .status_saving{
 	text-align: center;
