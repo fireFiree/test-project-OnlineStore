@@ -6,6 +6,9 @@ export default class OrdersWindowView extends JetView {
 	config() {
 		const form = {
 			view: "form",
+			elementsConfig: {
+				labelWidth: 150
+			},
 			elements: [
 				{view: "richselect",
 					label: "Status",
@@ -19,7 +22,7 @@ export default class OrdersWindowView extends JetView {
 							$$("declineReason").hide();
 						}
 					}}},
-				{view: "text", id: "declineReason", label: "Decline Reason", name: "declineReason", hidden: true, placeholder: "Type The Reason", invalidMessage: "Reason can't be Empty"},
+				{view: "textarea", id: "declineReason", label: "Decline Reason", name: "declineReason", hidden: true, placeholder: "Type The Reason", invalidMessage: "Reason can't be Empty"},
 				{view: "button", value: "Save", click() { this.$scope.saveForm(); }}
 			],
 			rules: {

@@ -45,7 +45,7 @@ export default class PhoneWindowView extends JetView {
 			head: {
 				view: "toolbar",
 				cols: [
-					{view: "label", label: "#Name#", name: "header"},
+					{view: "label", label: "#name#", name: "header"},
 					{view: "icon", icon: "times", click() { this.$scope.close(); }}
 				]
 			},
@@ -58,7 +58,7 @@ export default class PhoneWindowView extends JetView {
 	show(obj) {
 		this.getRoot().show();
 		this.getRoot().queryView({name: "body"}).parse(obj);
-		this.getRoot().queryView({name: "header"}).setValue(obj.Name);
+		this.getRoot().queryView({name: "header"}).setValue(obj.name);
 	}
 
 	close() {

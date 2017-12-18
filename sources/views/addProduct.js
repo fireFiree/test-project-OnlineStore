@@ -33,8 +33,8 @@ export default class AddProductView extends JetView {
 		];
 
 		const rls = {
-			Name: webix.rules.isNotEmpty,
-			Price: webix.rules.isNumber
+			name: webix.rules.isNotEmpty,
+			price: webix.rules.isNumber
 		};
 
 		const form = {
