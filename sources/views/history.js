@@ -4,7 +4,7 @@ import {history} from "models/history";
 const bodyTmplt = {
 	id: "statusDecline",
 	view: "template",
-	template: "<div class='declineReasonInfo'>#DeclineReason#</div>",
+	template: "<div class='declineReasonInfo'>#declineReason#</div>",
 	name: "statusDecline"
 };
 
@@ -46,7 +46,7 @@ export default class HistoryView extends JetView {
 			on: {
 				onItemClick(id) {
 					let item = this.getItem(id);
-					if (item.Status === "Declined") {
+					if (item.status === "Declined") {
 						this.$scope.win.show();
 						$$("statusDecline").parse(item);
 					}
@@ -62,6 +62,7 @@ export default class HistoryView extends JetView {
 
 		this.on(this.app, "categoryFiltering", () => {
 			this.show("../phones");
+			//this.$scope.app.callEvent("categoryFiltering");
 		});
 	}
 }
