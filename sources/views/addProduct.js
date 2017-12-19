@@ -1,4 +1,5 @@
 import {JetView} from "webix-jet";
+import {phones} from "models/phones";
 
 export default class AddProductView extends JetView {
 	config() {
@@ -50,14 +51,13 @@ export default class AddProductView extends JetView {
 
 		return form;
 	}
-	init() {
-
-	}
 
 	saveForm() {
 		let form = $$("addproduct:form");
+		
 		if (form.validate()) {
-			webix.message("EZ");
+			let item = form.getValues();
+			phones.add(item);
 		}
 		else {
 			webix.message("LOSER");
