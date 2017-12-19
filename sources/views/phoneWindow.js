@@ -28,7 +28,7 @@ export default class PhoneWindowView extends JetView {
 			onClick: {
 				"fa-star-o": function (id) {
 					let item = this.getValues();
-					item.rating += 1;
+					item.Rating += 1;
 					phones.updateItem(item.id, item);
 					this.$scope.getRoot().queryView({name: "body"}).refresh();
 				}
