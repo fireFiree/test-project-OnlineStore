@@ -1,5 +1,5 @@
 import {JetView} from "webix-jet";
-import {clients} from "models/clients";
+import {users} from "models/users";
 
 export default class ClientsInfoView extends JetView {
 	config() {
@@ -27,6 +27,6 @@ export default class ClientsInfoView extends JetView {
 		return clientsTable;
 	}
 	init(view) {
-		view.parse(clients);
+		view.parse(users);
 	}
 }

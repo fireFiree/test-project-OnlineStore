@@ -10,7 +10,6 @@ export default class AddProductView extends JetView {
 				{template: "Preview", id: "preview"},
 				{
 					view: "uploader",
-					align: "right",
 					value: "Add Image",
 					name: "image",
 					accept: "image/png, image/gif, image/jpg",
@@ -21,7 +20,7 @@ export default class AddProductView extends JetView {
 								let url = e.target.result;
 								$$("preview").setHTML(`<div class='previewContainer'>
                                     <img class='webix_ssheet_cimage preview' src='${url}'></img>
-                                </div>`);
+								</div>`);
 							};
 							reader.readAsDataURL(file.file);
 							return false;
@@ -54,9 +53,11 @@ export default class AddProductView extends JetView {
 
 	saveForm() {
 		let form = $$("addproduct:form");
-		
+
 		if (form.validate()) {
 			let item = form.getValues();
+			
+			item.rating = 0;
 			phones.add(item);
 		}
 		else {
