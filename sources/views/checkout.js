@@ -14,10 +14,10 @@ export default class CheckoutView extends JetView {
 		];
 
 		const rls = {
-			Name: webix.rules.isNotEmpty,
-			Email: webix.rules.isEmail,
-			Phone: webix.rules.isNotEmpty,
-			Address: webix.rules.isNotEmpty
+			name: webix.rules.isNotEmpty,
+			email: webix.rules.isEmail,
+			phone: webix.rules.isNotEmpty,
+			address: webix.rules.isNotEmpty
 		};
 
 		const form = {

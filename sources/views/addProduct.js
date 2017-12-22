@@ -1,4 +1,5 @@
 import {JetView} from "webix-jet";
+import {phones} from "models/phones";
 
 export default class AddProductView extends JetView {
 	config() {
@@ -9,7 +10,6 @@ export default class AddProductView extends JetView {
 				{template: "Preview", id: "preview"},
 				{
 					view: "uploader",
-					align: "right",
 					value: "Add Image",
 					name: "image",
 					accept: "image/png, image/gif, image/jpg",
@@ -20,7 +20,7 @@ export default class AddProductView extends JetView {
 								let url = e.target.result;
 								$$("preview").setHTML(`<div class='previewContainer'>
                                     <img class='webix_ssheet_cimage preview' src='${url}'></img>
-                                </div>`);
+								</div>`);
 							};
 							reader.readAsDataURL(file.file);
 							return false;
@@ -33,8 +33,8 @@ export default class AddProductView extends JetView {
 		];
 
 		const rls = {
-			Name: webix.rules.isNotEmpty,
-			Price: webix.rules.isNumber
+			name: webix.rules.isNotEmpty,
+			price: webix.rules.isNumber
 		};
 
 		const form = {
@@ -50,14 +50,15 @@ export default class AddProductView extends JetView {
 
 		return form;
 	}
-	init() {
-
-	}
 
 	saveForm() {
 		let form = $$("addproduct:form");
+
 		if (form.validate()) {
-			webix.message("EZ");
+			let item = form.getValues();
+			
+			item.rating = 0;
+			phones.add(item);
 		}
 		else {
 			webix.message("LOSER");
