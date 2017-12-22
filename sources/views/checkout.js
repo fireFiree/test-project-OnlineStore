@@ -11,7 +11,7 @@ export default class CheckoutView extends JetView {
 			{view: "richselect", label: "Delivery Type", name: "deliveryType"},
 			{view: "text", label: "Address", name: "address", placeholder: "Type Your Address", invalidMessage: "Delivery Address can't be Empty"},
 			{view: "richselect", label: "Payment Type", name: "paymentType"},
-			{view: "button", value: "Checkout", click() { this.$scope.saveForm(); this.$scope.show("/top/orders"); }},
+			{view: "button", value: "Checkout", click() { this.$scope.makeOrder()}},
 			{}
 		];
 
@@ -39,7 +39,12 @@ export default class CheckoutView extends JetView {
 			this.show("../phones");
 		});
 	}
-
+	makeOrder() {
+		this.saveForm();
+		bag.removeAll();
+		this.$scope.app.callEvent("OnBagChange");
+		this.show("/top/orders");
+	}
 	saveForm() {
 		let form = $$("checkout:form");
 		if (form.validate()) {

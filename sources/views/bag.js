@@ -24,6 +24,7 @@ export default class BagView extends JetView {
 				"fa-trash-o": function (ev, id) {
 					bag.remove(id);
 					this.$scope.app.callEvent("onTotalChange");
+					this.$scope.app.callEvent("onBagChange");
 				}
 			}
 		};

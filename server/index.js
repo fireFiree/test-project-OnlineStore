@@ -1,40 +1,39 @@
 const express = require("express");
 const bodyParser = require("body-parser");
+const fileUpload = require("express-fileupload");
 
-const phones = require("./phones/phones.js");
-const users = require("./users/users.js")
-const orders = require("./orders/orders.js")
+const phones = require("./phones");
+const users = require("./users");
+const orders = require("./orders");
 
 const app = express();
 
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
+app.use(fileUpload());
 
-app.all('/*', function(req, res, next) {
-    res.header('Access-Control-Allow-Methods', 'POST, GET, PUT, DELETE, OPTIONS');
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "X-Requested-With");
-    next();
+app.all("/*", (req, res, next) => {
+	res.header("Access-Control-Allow-Methods", "POST, GET, PUT, DELETE, OPTIONS");
+	res.header("Access-Control-Allow-Origin", "*");
+	res.header("Access-Control-Allow-Headers", "X-Requested-With");
+	next();
 });
 
-// PHONES
-app.get("/api/phones", phones.getAll);
-app.post("/api/phones", phones.add); 
-app.put("/api/phones/:id", phones.update);
-app.delete("/api/phones/:id", phones.delete);
+app.use("/api/phones", phones);
+app.use("/api/orders", orders);
+app.use("/api/users", users);
 
-//USERS
-app.get("/api/users", users.getAll);
-app.post("/api/users", users.add); 
-app.put("/api/users/:id", users.update);
-app.delete("/api/users/:id", users.delete);
-
-//ORDERS DONT WORK YET
-app.get("/api/orders", orders.getAll);
-app.post("/api/orders", orders.add); 
-app.put("/api/orders/:id", orders.update);
-app.delete("/api/orders/:id", orders.delete);
-
-app.listen(3000, function(){
-    console.log("server is running");
+app.post("/upload", (req, res) => {
+	if (!req.files) return res.send({status: "error"});
+	console.log(req.files.upload);
+	let reader = new FileReader();
+	reader.onloadend = function () {
+		res.send({status: "server", image: reader.result});
+	};
+	reader.readAsDataURL(req.files.upload);
 });
+
+app.listen(3000, () => {
+	console.log("server is running");
+});
+

@@ -9,9 +9,12 @@ export default class AddProductView extends JetView {
 			{rows: [
 				{template: "Preview", id: "preview"},
 				{
+					id: "imgUploader",
 					view: "uploader",
 					value: "Add Image",
-					name: "image",
+					autosend: true,
+					name: "img",
+					upload: "http://localhost:3000/api/phones/upload",
 					accept: "image/png, image/gif, image/jpg",
 					on: {
 						onBeforeFileAdd(file) {
@@ -23,7 +26,7 @@ export default class AddProductView extends JetView {
 								</div>`);
 							};
 							reader.readAsDataURL(file.file);
-							return false;
+							return true;
 						}
 					}
 				}
@@ -56,7 +59,11 @@ export default class AddProductView extends JetView {
 
 		if (form.validate()) {
 			let item = form.getValues();
+			let uploader = $$("imgUploader");
+			let fileId = uploader.files.getFirstId();
+			let img = uploader.files.getItem(fileId).image;
 
+			item.image = img;
 			item.rating = 0;
 			phones.add(item);
 		}
