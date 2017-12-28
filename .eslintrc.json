@@ -11,8 +11,14 @@
     "rules": {
         "no-extra-parens": "warn",
         "valid-jsdoc": "warn",
-        "class-methods-use-this": "off", 
-        "no-param-reassign": "off"
+        "class-methods-use-this": "off",
+        "no-param-reassign": "off",
+        "no-unused-expressions": "off",
+		"no-debugger": "off",
+		"func-names": "off",
+		"object-shorthand": "off",
+		"eqeqeq": "off",
+		"no-var": "off"
     },
 	"plugins":[
 		"import"

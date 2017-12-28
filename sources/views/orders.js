@@ -1,13 +1,28 @@
 import {JetView} from "webix-jet";
-import {orders} from "models/orders";
-import OrdersWindowView from "views/orderWindow"
+import {orders} from "../models/orders";
+import OrdersWindowView from "../views/orderWindow";
 
 
 export default class OrdersView extends JetView {
 	config() {
 		const clmns = [
 			{id: "id", header: "#", width: 40},
-			{id: "product", header: ["Product", {content: "textFilter"}], width: 250, sort: "string"},
+			{
+				id: "options",
+				header: ["Product", {content: "textFilter"}],
+				width: 250,
+				sort: "string",
+				template(item) {
+					let out = "";
+					if (typeof item.options !== "object") {
+						item.options = JSON.parse(item.options);
+					}
+					item.options.forEach((elem) => {
+						out += `<span class = 'prodInfo'>${elem.product} x${elem.amount}</span>  `;
+					});
+					return out;
+				}
+			},
 			{id: "amount", header: "Amount", sort: "int", width: 70},
 			{id: "buyerName", header: ["BuyerName", {content: "textFilter"}], width: 120},
 			{id: "buyerEmail", header: "BuyerEmail", width: 100},

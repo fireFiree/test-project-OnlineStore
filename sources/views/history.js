@@ -1,5 +1,5 @@
 import {JetView} from "webix-jet";
-import {history} from "models/history";
+import {history} from "../models/history";
 
 const bodyTmplt = {
 	id: "statusDecline",
@@ -62,7 +62,7 @@ export default class HistoryView extends JetView {
 
 		this.on(this.app, "categoryFiltering", () => {
 			this.show("../phones");
-			//this.$scope.app.callEvent("categoryFiltering");
+			// this.$scope.app.callEvent("categoryFiltering");
 		});
 	}
 }

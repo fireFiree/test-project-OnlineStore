@@ -1,6 +1,5 @@
 import {JetView} from "webix-jet";
-import {orders} from "models/orders";
-
+import {orders} from "../models/orders";
 
 export default class OrdersWindowView extends JetView {
 	config() {
