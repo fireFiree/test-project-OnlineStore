@@ -1,5 +1,5 @@
 import {JetView} from "webix-jet";
-import {phones} from "models/phones";
+import {phones} from "../models/phones";
 
 export default class AddProductView extends JetView {
 	config() {
@@ -56,7 +56,7 @@ export default class AddProductView extends JetView {
 
 		if (form.validate()) {
 			let item = form.getValues();
-			
+
 			item.rating = 0;
 			phones.add(item);
 		}

@@ -1,6 +1,52 @@
+.amoCounter{
+    margin-left: 10px;
+    margin-top: 25px;
+}
+
+.prodInfo {
+	margin-bottom: 2px;
+}
+
+.name{
+    color: black;
+    float:right;
+	padding-right: 20px
+}
+
+.trashIcon{
+    cursor: pointer;
+    margin-left: 15px;
+}
+
+.whiteButton{
+    color: black;
+    text-align: center;
+	border: none !important;
+}
+
+.whiteButton .text{
+	display: inline-block;
+    color: black;
+}
+
+
+.blueButton{
+    color: white;
+    background: #3498db;
+    border:0px;
+    text-align: center;
+}
+
+.shopCartIco{
+	margin-left: 20px;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
 .webixappstart{
     opacity:0;
 }
+
 .webixapp{
     transition: opacity 500ms;
     opacity: 1;
@@ -16,7 +62,7 @@
 .phoneDescription {
     position:relative;
     float: left;
-    max-height:200px; 
+    max-height:200px;
     max-width:300px;
 
 }
@@ -41,7 +87,7 @@
     top:50%;
     right:50%;
 	transform:translate(+50%,-50%);
-	max-height:70px; 
+	max-height:70px;
 	max-width:100px;
 }
 
@@ -59,7 +105,7 @@
     top:50%;
     right:50%;
 	transform:translate(+50%,-50%);
-	max-height:200px; 
+	max-height:200px;
 	max-width:150px;
 }
 
@@ -72,7 +118,7 @@
     top:50%;
     right:50%;
 	transform:translate(+50%,-50%);
-	max-height:250px; 
+	max-height:250px;
 }
 
 .previewContainer {

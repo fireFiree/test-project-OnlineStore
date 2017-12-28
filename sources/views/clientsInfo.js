@@ -1,5 +1,5 @@
 import {JetView} from "webix-jet";
-import {users} from "models/users";
+import {users} from "../models/users";
 
 export default class ClientsInfoView extends JetView {
 	config() {

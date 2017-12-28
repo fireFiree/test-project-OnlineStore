@@ -1,5 +1,5 @@
 import {JetView} from "webix-jet";
-import {phones} from "models/phones";
+import {phones} from "../models/phones";
 
 
 function bodyTemplate(obj) {
@@ -26,7 +26,7 @@ export default class PhoneWindowView extends JetView {
 			template: bodyTemplate,
 			name: "body",
 			onClick: {
-				"fa-star-o": function (id) {
+				"fa-star-o": function () {
 					let item = this.getValues();
 					item.rating += 1;
 					phones.updateItem(item.id, item);
