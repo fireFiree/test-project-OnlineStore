@@ -42,11 +42,8 @@ function add(req, res) {
 
 	let data = fs.readFileSync("./orders/orders.json", "utf8");
 	let orders = JSON.parse(data);
-	let id = 1;
+	let id = orders.length ? Math.max(...orders.map(o => o.id)) + 1 : 1;
 
-	if (orders.length) {
-		id = Math.max(...orders.map(o => o.id)) + 1;
-	}
 	order.id = id;
 	orders.push(order);
 	fs.writeFileSync("./orders/orders.json", JSON.stringify(orders));

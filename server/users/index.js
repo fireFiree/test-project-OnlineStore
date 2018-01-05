@@ -32,16 +32,11 @@ function add(req, res) {
 
 	let data = fs.readFileSync("./users/users.json", "utf8");
 	let users = JSON.parse(data);
-	let id = 1;
-
-	if (users.length) {
-		id = Math.max(...users.map(o => o.id)) + 1;
-	}
+	let id = users.length ? Math.max(...users.map(o => o.id)) + 1 : 1;
 
 	user.id = id;
 	users.push(user);
-	data = JSON.stringify(users);
-	fs.writeFileSync("./users/users.json", data);
+	fs.writeFileSync("./users/users.json", JSON.stringify(users));
 	res.send(user);
 }
 
@@ -70,8 +65,7 @@ function update(req, res) {
 		user.registrationDate = registrationDate;
 		user.password = password;
 
-		const data = JSON.stringify(users);
-		fs.writeFileSync("./users/users.json", data);
+		fs.writeFileSync("./users/users.json", JSON.stringify(users));
 		res.send(user);
 	}
 	else {
@@ -93,9 +87,8 @@ function remove(req, res) {
 	}
 	if (index > -1) {
 		let user = users.splice(index, 1)[0];
-		let data = JSON.stringify(users);
 
-		fs.writeFileSync("./users/users.json", data);
+		fs.writeFileSync("./users/users.json", JSON.stringify(users));
 		res.send(user);
 	}
 	else {

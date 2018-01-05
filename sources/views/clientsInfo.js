@@ -19,7 +19,8 @@ export default class ClientsInfoView extends JetView {
         		{template: "User's Form", type: "section"},
         		{view: "text", label: "Name", name: "name", invalidMessage: "Name can't be Empty!"},
         		{view: "text", label: "Email", name: "email", invalidMessage: "Email should be Email!"},
-        		{view: "datepicker", label: "Registration Date", name: "registrationDate", format: webix.i18n.dateFormatStr},
+				{view: "datepicker", label: "Registration Date", name: "registrationDate", format: webix.i18n.dateFormatStr},
+				{view: "checkbox", labelRight: "Admin", name: "isAdmin", checkValue: true, uncheckedValue: false},
        			{cols: [
 					{view: "button", value: "Save", type: "form", click() { this.$scope.saveForm(); }},
 					{view: "button", value: "Clear", click() { this.$scope.clearForm(); }}
@@ -60,7 +61,13 @@ export default class ClientsInfoView extends JetView {
 		let form = $$("clientsInfo:form");
 		if (form.validate()) {
 			let item = form.getValues();
-			users.updateItem(item.id, item);
+			if (item.id == undefined) {
+				webix.alert("You can't add new users here!");
+			}
+			else {
+				users.updateItem(item.id, item);
+			}
+
 			this.clearForm();
 		}
 	}

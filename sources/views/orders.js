@@ -8,8 +8,9 @@ export default class OrdersView extends JetView {
 			{id: "id", header: "#", width: 40},
 			{
 				id: "options",
+				name: "options",
 				header: ["Product", {content: "textFilter"}],
-				width: 250,
+				width: 170,
 				sort: "string",
 				template(item) {
 					let out = "";
@@ -17,7 +18,7 @@ export default class OrdersView extends JetView {
 						item.options = JSON.parse(item.options);
 					}
 					item.options.forEach((elem) => {
-						out += `<span class = 'prodInfo'>${elem.product} x ${elem.amount}</span><br/>  `;
+						out += `<span class='prodInfo'>${elem.product} x ${elem.amount}</span>`;
 					});
 					return out;
 				}
@@ -25,9 +26,9 @@ export default class OrdersView extends JetView {
 			{id: "buyerName", header: ["BuyerName", {content: "textFilter"}], width: 120},
 			{id: "buyerEmail", header: "BuyerEmail", width: 100},
 			{id: "address", header: "Address", sort: "string", width: 200},
-			{id: "delivery", header: "Delivery", sort: "string", width: 80},
-			{id: "payment", header: "Payment", sort: "string", width: 80},
-			{id: "orderDate", header: "Order Date", sort: "string", width: 80, format: webix.i18n.dateFormatStr},
+			{id: "delivery", header: "Delivery", sort: "string", width: 120},
+			{id: "payment", header: "Payment", sort: "string", width: 100},
+			{id: "orderDate", header: "Order Date", sort: "string", width: 120, format: webix.i18n.dateFormatStr},
 			{id: "status", header: "Status", sort: "string", width: 100}
 		];
 
@@ -35,17 +36,17 @@ export default class OrdersView extends JetView {
 			view: "datatable",
 			id: "orders:datatable",
 			columns: clmns,
-			rowLineHeight: 80,
+			rowLineHeight: 25,
 			fixedRowHeight: false,
-			rowHeight: 80,
+			rowHeight: 85,
 			autoWidth: true,
 			on: {
 				onItemClick(id) {
 					let item = this.getItem(id);
 					this.$scope.win.show(item);
 				},
-				"onresize":webix.once(function(){
-					this.adjustRowHeight("options", true); 
+				onresize: webix.once(function () {
+					this.adjustRowHeight("options", true);
 				})
 			}
 		};
