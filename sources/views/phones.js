@@ -51,31 +51,26 @@ export default class PhonesView extends JetView {
 			onClick: {
 				"fa-shopping-basket": function (ev, id) {
 					this.$scope.addToBag(ev, id);
-					this.$scope.refreshBadge();
+					this.$scope.app.callEvent("onBagChange");
 				}
 			}
 		};
 		return phonesTable;
 	}
 
-	refreshBadge() {
-		let amo = 0;
-		bag.data.each(
-			(obj) => {
-				amo += obj.amountCounter;
-			}
-		);
-		$$("bag").define("badge", amo);
-		$$("bag").refresh();
-	}
-
 	init(view) {
 		view.parse(phones);
+
 		this.win = this.ui(PhoneWindowView);
 
+		view.attachEvent("onAfterFilter", function () {
+			this.blockEvent();
+			this.$scope.afterFilter();
+			this.unblockEvent();
+		});
 
-		let table = $$("phonesTable");
 		this.on(this.app, "categoryFiltering", () => {
+			let table = $$("phonesTable");
 			table.filterByAll();
 		});
 	}
@@ -106,5 +101,17 @@ export default class PhonesView extends JetView {
 			});
 		}
 		return item.amountCounter;
+	}
+	afterFilter() {
+		let table = $$("phonesTable");
+		let tree = this.getRoot().getParentView().queryView({view: "tree"});
+		let value = tree.getSelectedItem().value;
+
+		if (value !== "Phones") {
+			table.filter("#name#", value, true);
+		}
+		else {
+			table.filter(() => true, "", true);
+		}
 	}
 }

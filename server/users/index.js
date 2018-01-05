@@ -1,42 +1,62 @@
 const fs = require("fs");
 
-module.exports.getAll = function (req, res) {
+const express = require("express");
+
+const router = express.Router();
+
+router.get("/", getAll);
+router.post("/", add);
+router.put("/:id", update);
+router.delete("/:id", remove);
+
+function getAll(req, res) {
 	const content = fs.readFileSync("./users/users.json", "utf8");
 	const users = JSON.parse(content);
 	res.send(users);
-};
+}
 
-module.exports.add = function (req, res) {
+function add(req, res) {
 	if (!req.body) return res.sendStatus(400);
 
-	const name = req.body.name;
-	const email = req.body.email;
-	const registrationDate = req.body.registrationDate;
-	const password = req.body.password;
+	const name = req.body.name || "";
+	const email = req.body.email || "";
+	const registationDate = req.body.registationDate || new Date();
+	const password = req.body.password || "";
 
-	let user = {name: name, email: email, password: password, registrationDate: registrationDate, isAdmin: "false"};
+	let user = {name,
+		email,
+		registationDate,
+		password,
+		isAdmin: "false"
+	};
 
 	let data = fs.readFileSync("./users/users.json", "utf8");
 	let users = JSON.parse(data);
+	let id = 1;
 
-	const id = Math.max(...users.map(o => o.id));
-	user.id = id + 1;
+	if (users.length) {
+		id = Math.max(...users.map(o => o.id)) + 1;
+	}
+
+	user.id = id;
 	users.push(user);
 	data = JSON.stringify(users);
 	fs.writeFileSync("./users/users.json", data);
 	res.send(user);
-};
+}
 
-module.exports.update = function (req, res) {
+function update(req, res) {
 	if (!req.body) return res.sendStatus(400);
 
 	const id = req.params.id;
-	const name = req.body.name;
-	const email = req.body.email;
-	const registrationDate = req.body.registrationDate;
+	const name = req.body.name || "";
+	const email = req.body.email || "";
+	const registrationDate = req.body.registrationDate || new Date();
+	const password = req.body.password || "";
 
 	const data = fs.readFileSync("./users/users.json", "utf8");
 	let users = JSON.parse(data);
+	let user;
 	for (let i = 0; i < users.length; i++) {
 		if (users[i].id == id) {
 			user = users[i];
@@ -48,6 +68,7 @@ module.exports.update = function (req, res) {
 		user.name = name;
 		user.email = email;
 		user.registrationDate = registrationDate;
+		user.password = password;
 
 		const data = JSON.stringify(users);
 		fs.writeFileSync("./users/users.json", data);
@@ -56,9 +77,9 @@ module.exports.update = function (req, res) {
 	else {
 		res.status(404).send(user);
 	}
-};
+}
 
-module.exports.delete = function (req, res) {
+function remove(req, res) {
 	const id = req.params.id;
 	let data = fs.readFileSync("./users/users.json", "utf8");
 	let users = JSON.parse(data);
@@ -80,4 +101,7 @@ module.exports.delete = function (req, res) {
 	else {
 		res.status(404).send();
 	}
-};
+}
+
+
+module.exports = router;
