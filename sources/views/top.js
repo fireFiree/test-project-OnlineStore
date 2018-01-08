@@ -1,6 +1,14 @@
-import {JetView, plugins} from "webix-jet";
+import {JetView} from "webix-jet";
 import {categories} from "../models/categories";
 import {bag} from "../models/bag";
+
+function templateList(obj) {
+	if (obj == null) {
+		return "<p>Bag is Empty</p>";
+	}
+
+	return "#name# x #amount# = #sum#";
+}
 
 export default class TopView extends JetView {
 	config() {
@@ -14,7 +22,18 @@ export default class TopView extends JetView {
 				{view: "template", template: "Hi, varyas!", type: "header", borderless: true},
 				{css: "blueButton", view: "button", type: "icon", icon: "", id: "logout", label: "Logout", borderless: true, width: 100, click() { this.$scope.logOut(); }},
 				{css: "blueButton", view: "button", type: "icon", icon: "", id: "history", label: "History", borderless: true, width: 100, click() { this.$scope.showHistory(); }},
-				{css: "blueButton", view: "button", type: "icon", icon: "shopping-bag", id: "bag", label: "Bag", borderless: true, width: 100, click() { this.$scope.showBag(); }}
+				{css: "blueButton",
+					view: "button",
+					type: "icon",
+					icon: "shopping-bag",
+					id: "bag",
+					label: "Bag",
+					borderless: true,
+					width: 100,
+					click() {
+						this.$scope.showBag();
+					}
+				}
 			]
 		};
 		let adminMenu = {
@@ -34,9 +53,9 @@ export default class TopView extends JetView {
 				}
 			}
 		};
-		const tree = {
+		const categoryTree = {
 			view: "tree",
-			id: "top:catalogTree",
+			id: "top:categoryTree",
 			select: true,
 			maxWidth: 400,
 			on: {
@@ -50,13 +69,13 @@ export default class TopView extends JetView {
 			rows: [
 				header,
 				{
-					cols: [{rows: [tree, adminMenu]}, {$subview: true}]
+					cols: [{rows: [categoryTree, adminMenu]}, {$subview: true}]
 				}
 			]};
 		return ui;
 	}
 	init() {
-		$$("top:catalogTree").parse(categories);
+		$$("top:categoryTree").parse(categories);
 
 		this.on(this.app, "onBagChange", () => {
 			this.refreshBadge();

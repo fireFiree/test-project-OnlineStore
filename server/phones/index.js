@@ -28,11 +28,8 @@ function add(req, res) {
 
 	let data = fs.readFileSync("./phones/phones.json", "utf8");
 	let phones = JSON.parse(data);
-	let id = 1;
+	let id = phones.length ? Math.max(...phones.map(o => o.id)) + 1 : 1;
 
-	if (phones.length) {
-		id = Math.max(...phones.map(o => o.id)) + 1;
-	}
 	phone.id = id;
 	phones.push(phone);
 

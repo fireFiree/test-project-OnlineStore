@@ -1,3 +1,3 @@
-export const categories = new webix.DataCollection({
+export const categories = new webix.TreeCollection({
 	url: "./sources/staticdata/categories.js"
 });
