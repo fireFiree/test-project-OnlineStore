@@ -24,8 +24,8 @@ export default class OrdersView extends JetView {
 				}
 			},
 			{id: "buyerName", header: ["BuyerName", {content: "textFilter"}], width: 120},
-			{id: "buyerEmail", header: "BuyerEmail", width: 100},
-			{id: "address", header: "Address", sort: "string", width: 200},
+			{id: "buyerEmail", header: "BuyerEmail", fillspace: 2, minWidth: 100},
+			{id: "address", header: "Address", sort: "string", fillspace: 2, minWidth: 100},
 			{id: "delivery", header: "Delivery", sort: "string", width: 120},
 			{id: "payment", header: "Payment", sort: "string", width: 100},
 			{id: "orderDate", header: "Order Date", sort: "string", width: 120, format: webix.i18n.dateFormatStr},
@@ -36,18 +36,18 @@ export default class OrdersView extends JetView {
 			view: "datatable",
 			id: "orders:datatable",
 			columns: clmns,
-			rowLineHeight: 25,
+			rowLineHeight: 29,
 			fixedRowHeight: false,
-			rowHeight: 85,
+			rowHeight: 29,
 			autoWidth: true,
 			on: {
 				onItemClick(id) {
 					let item = this.getItem(id);
 					this.$scope.win.show(item);
 				},
-				onresize: webix.once(function () {
-					this.adjustRowHeight("options", true);
-				})
+				"data->onStoreLoad": function(){
+					this.adjustRowHeight();
+				}
 			}
 		};
 

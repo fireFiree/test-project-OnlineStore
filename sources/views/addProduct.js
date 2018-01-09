@@ -55,7 +55,7 @@ export default class AddProductView extends JetView {
 
 		return form;
 	}
-
+	
 	saveForm() {
 		let form = $$("addproduct:form");
 
@@ -68,6 +68,8 @@ export default class AddProductView extends JetView {
 			item.image = img;
 			item.rating = 0;
 			phones.add(item);
+			webix.alert("New Product succesfully added!");
+			this.show("./phones");
 		}
 	}
 }

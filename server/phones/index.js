@@ -4,6 +4,10 @@ const express = require("express");
 
 const router = express.Router();
 
+const serverConfig = require("../serverConfig.js");
+
+const FILE_PATH = `${serverConfig.SERVER_PATH}phones/phones.json`;
+
 router.get("/", getAll);
 router.post("/", add);
 router.put("/:id", update);
@@ -11,7 +15,7 @@ router.delete("/:id", remove);
 router.post("/upload", upload);
 
 function getAll(req, res) {
-	const content = fs.readFileSync("./phones/phones.json", "utf8");
+	const content = fs.readFileSync(FILE_PATH, "utf8");
 	const phones = JSON.parse(content);
 	res.send(phones);
 }
@@ -26,14 +30,14 @@ function add(req, res) {
 
 	let phone = {name, price: new Number(price), rating: new Number(rating), image};
 
-	let data = fs.readFileSync("./phones/phones.json", "utf8");
+	let data = fs.readFileSync(FILE_PATH, "utf8");
 	let phones = JSON.parse(data);
 	let id = phones.length ? Math.max(...phones.map(o => o.id)) + 1 : 1;
 
 	phone.id = id;
 	phones.push(phone);
 
-	fs.writeFileSync("./phones/phones.json", JSON.stringify(phones));
+	fs.writeFileSync(FILE_PATH, JSON.stringify(phones));
 	res.send(phone);
 }
 
@@ -46,7 +50,7 @@ function update(req, res) {
 	const rating = req.body.rating || 0;
 	const image = req.body.image || "";
 
-	const data = fs.readFileSync("./phones/phones.json", "utf8");
+	const data = fs.readFileSync(FILE_PATH, "utf8");
 	let phones = JSON.parse(data);
 	let phone;
 	for (let i = 0; i < phones.length; i++) {
@@ -61,7 +65,7 @@ function update(req, res) {
 		phone.price = new Number(price);
 		phone.image = image;
 		phone.rating = new Number(rating);
-		fs.writeFileSync("./phones/phones.json", JSON.stringify(phones));
+		fs.writeFileSync(FILE_PATH, JSON.stringify(phones));
 		res.send(phone);
 	}
 	else {
@@ -71,7 +75,7 @@ function update(req, res) {
 
 function remove(req, res) {
 	const id = req.params.id;
-	let data = fs.readFileSync("./phones/phones.json", "utf8");
+	let data = fs.readFileSync(FILE_PATH, "utf8");
 	let phones = JSON.parse(data);
 	let index = -1;
 
@@ -84,7 +88,7 @@ function remove(req, res) {
 	if (index > -1) {
 		let phone = phones.splice(index, 1)[0];
 
-		fs.writeFileSync("./phones/phones.json", JSON.stringify(phones));
+		fs.writeFileSync(FILE_PATH, JSON.stringify(phones));
 		res.send(phone);
 	}
 	else {

@@ -4,13 +4,17 @@ const express = require("express");
 
 const router = express.Router();
 
+const serverConfig = require("../serverConfig.js");
+
+const FILE_PATH = `${serverConfig.SERVER_PATH}orders/orders.json`;
+
 router.get("/", getAll);
 router.post("/", add);
 router.put("/:id", update);
 router.delete("/:id", remove);
 
 function getAll(req, res) {
-	const content = fs.readFileSync("./orders/orders.json", "utf8");
+	const content = fs.readFileSync(FILE_PATH, "utf8");
 	const orders = JSON.parse(content);
 	res.send(orders);
 }
@@ -19,8 +23,8 @@ function add(req, res) {
 	if (!req.body) return res.sendStatus(400);
 
 	const address = req.body.address || "";
-	const delivery = req.body.delivery || "On The Way";
-	const payment = req.body.payment || "Card";
+	const deliveryType = req.body.deliveryType || "On The Way";
+	const paymentType = req.body.paymentType || "Card";
 	const status = req.body.status || "In Process";
 	const declineReason = req.body.declineReason || "";
 	const orderDate = req.body.orderDate || (new Date()).toString();
@@ -30,8 +34,8 @@ function add(req, res) {
 
 
 	let order = {address,
-		delivery,
-		payment,
+		deliveryType,
+		paymentType,
 		status,
 		declineReason,
 		orderDate,
@@ -40,13 +44,13 @@ function add(req, res) {
 		options
 	};
 
-	let data = fs.readFileSync("./orders/orders.json", "utf8");
+	let data = fs.readFileSync(FILE_PATH, "utf8");
 	let orders = JSON.parse(data);
 	let id = orders.length ? Math.max(...orders.map(o => o.id)) + 1 : 1;
 
 	order.id = id;
 	orders.push(order);
-	fs.writeFileSync("./orders/orders.json", JSON.stringify(orders));
+	fs.writeFileSync(FILE_PATH, JSON.stringify(orders));
 	res.send(order);
 }
 
@@ -55,8 +59,8 @@ function update(req, res) {
 
 	const id = req.params.id;
 	const address = req.body.address || "";
-	const delivery = req.body.delivery || "On The Way";
-	const payment = req.body.payment || "Card";
+	const delivery = req.body.deliveryType || "On The Way";
+	const payment = req.body.paymentType || "Card";
 	const status = req.body.status || "In Process";
 	const declineReason = req.body.declineReason || "";
 	const orderDate = req.body.orderDate || (new Date()).toString();
@@ -64,7 +68,7 @@ function update(req, res) {
 	const buyerEmail = req.body.buyerEmail || "";
 	const options = req.body.options || "";
 
-	const data = fs.readFileSync("./orders/orders.json", "utf8");
+	const data = fs.readFileSync(FILE_PATH, "utf8");
 	let orders = JSON.parse(data);
 	let order;
 	for (let i = 0; i < orders.length; i++) {
@@ -76,8 +80,8 @@ function update(req, res) {
 	if (order) {
 		order.id = new Number(id);
 		order.address = address;
-		order.delivery = delivery;
-		order.payment = payment;
+		order.deliveryType = delivery;
+		order.paymentType = payment;
 		order.status = status;
 		order.declineReason = declineReason;
 		order.orderDate = orderDate;
@@ -85,7 +89,7 @@ function update(req, res) {
 		order.buyerEmail = buyerEmail;
 		order.options = options;
 
-		fs.writeFileSync("./orders/orders.json", JSON.stringify(orders));
+		fs.writeFileSync(FILE_PATH, JSON.stringify(orders));
 		res.send(order);
 	}
 	else {
@@ -95,7 +99,7 @@ function update(req, res) {
 
 function remove(req, res) {
 	const id = req.params.id;
-	let data = fs.readFileSync("./orders/orders.json", "utf8");
+	let data = fs.readFileSync(FILE_PATH, "utf8");
 	let orders = JSON.parse(data);
 	let index = -1;
 
@@ -108,7 +112,7 @@ function remove(req, res) {
 	if (index > -1) {
 		let order = orders.splice(index, 1)[0];
 
-		fs.writeFileSync("./orders/orders.json", JSON.stringify(orders));
+		fs.writeFileSync(FILE_PATH, JSON.stringify(orders));
 		res.send(order);
 	}
 	else {
