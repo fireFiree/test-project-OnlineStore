@@ -4,13 +4,17 @@ const express = require("express");
 
 const router = express.Router();
 
+const serverConfig = require("../serverConfig.js");
+
+const FILE_PATH = `${serverConfig.SERVER_PATH}users/users.json`;
+
 router.get("/", getAll);
 router.post("/", add);
 router.put("/:id", update);
 router.delete("/:id", remove);
 
 function getAll(req, res) {
-	const content = fs.readFileSync("./users/users.json", "utf8");
+	const content = fs.readFileSync(FILE_PATH, "utf8");
 	const users = JSON.parse(content);
 	res.send(users);
 }
@@ -27,16 +31,16 @@ function add(req, res) {
 		email,
 		registationDate,
 		password,
-		isAdmin: "false"
+		isAdmin: false
 	};
 
-	let data = fs.readFileSync("./users/users.json", "utf8");
+	let data = fs.readFileSync(FILE_PATH, "utf8");
 	let users = JSON.parse(data);
 	let id = users.length ? Math.max(...users.map(o => o.id)) + 1 : 1;
 
 	user.id = id;
 	users.push(user);
-	fs.writeFileSync("./users/users.json", JSON.stringify(users));
+	fs.writeFileSync(FILE_PATH, JSON.stringify(users));
 	res.send(user);
 }
 
@@ -48,8 +52,9 @@ function update(req, res) {
 	const email = req.body.email || "";
 	const registrationDate = req.body.registrationDate || new Date();
 	const password = req.body.password || "";
+	const isAdmin = req.body.isAdmin;
 
-	const data = fs.readFileSync("./users/users.json", "utf8");
+	const data = fs.readFileSync(FILE_PATH, "utf8");
 	let users = JSON.parse(data);
 	let user;
 	for (let i = 0; i < users.length; i++) {
@@ -64,8 +69,9 @@ function update(req, res) {
 		user.email = email;
 		user.registrationDate = registrationDate;
 		user.password = password;
+		user.isAdmin = isAdmin;
 
-		fs.writeFileSync("./users/users.json", JSON.stringify(users));
+		fs.writeFileSync(FILE_PATH, JSON.stringify(users));
 		res.send(user);
 	}
 	else {
@@ -75,7 +81,7 @@ function update(req, res) {
 
 function remove(req, res) {
 	const id = req.params.id;
-	let data = fs.readFileSync("./users/users.json", "utf8");
+	let data = fs.readFileSync(FILE_PATH, "utf8");
 	let users = JSON.parse(data);
 	let index = -1;
 
@@ -88,7 +94,7 @@ function remove(req, res) {
 	if (index > -1) {
 		let user = users.splice(index, 1)[0];
 
-		fs.writeFileSync("./users/users.json", JSON.stringify(users));
+		fs.writeFileSync(FILE_PATH, JSON.stringify(users));
 		res.send(user);
 	}
 	else {

@@ -8,9 +8,9 @@ export default class CheckoutView extends JetView {
 			{view: "text", label: "Your Name", name: "buyerName", placeholder: "Type Your Name", invalidMessage: "Your Name can't be Empty"},
 			{view: "text", label: "Email", name: "buyerEmail", placeholder: "Type Your Email", invalidMessage: "Incorrect Email"},
 			{view: "text", label: "Phone", name: "phone", placeholder: "Type Your Phone", invalidMessage: "Incorrect Phone"},
-			{view: "richselect", label: "Delivery Type", name: "deliveryType"},
+			{view: "richselect", label: "Delivery Type", name: "deliveryType", options: ["Courier", "Post", "Pickup"]},
 			{view: "text", label: "Address", name: "address", placeholder: "Type Your Address", invalidMessage: "Delivery Address can't be Empty"},
-			{view: "richselect", label: "Payment Type", name: "paymentType"},
+			{view: "richselect", label: "Payment Type", name: "paymentType", options: ["Card", "Terminal", "Cash"]},
 			{view: "button", value: "Checkout", click() { this.$scope.makeOrder(); }},
 			{}
 		];

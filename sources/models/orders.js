@@ -7,6 +7,7 @@ export const orders = new webix.DataCollection({
 		},
 		$save(obj) {
 			if (obj.orderDate) { obj.orderDate = webix.i18n.parseFormatStr(obj.orderDate); }
+			if (obj.options) { obj.options = JSON.stringify(obj.options); }
 		}
 	}
 });
