@@ -1,9 +1,5 @@
 import {JetView} from "webix-jet";
 
-export function validate(title) {
-	return title.trim() !== "";
-}
-
 export default class TopView extends JetView {
 	config() {
 		const header = {

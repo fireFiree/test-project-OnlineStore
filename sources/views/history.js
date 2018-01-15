@@ -29,12 +29,12 @@ const window = {
 export default class HistoryView extends JetView {
 	config() {
 		const clmns = [
-			{id: "product", header: ["Product", {content: "textFilter"}], width: 300, sort: "string"},
-			{id: "amount", header: "Amount", sort: "int", width: 70},
-			{id: "address", header: "Address", sort: "string", width: 300},
-			{id: "delivery", header: "Delivery", sort: "string", width: 100},
-			{id: "payment", header: "Payment", sort: "string", width: 100},
-			{id: "orderDate", header: "Order Date", sort: "string", width: 100, format: webix.i18n.dateFormatStr},
+			{id: "product", header: ["Product", {content: "textFilter"}], fillspace: 3, sort: "string"},
+			{id: "amount", header: "Amount", sort: "int", fillspace: 2},
+			{id: "address", header: "Address", sort: "string", fillspace: 3},
+			{id: "delivery", header: "Delivery", sort: "string", fillspace: 2},
+			{id: "payment", header: "Payment", sort: "string", fillspace: 2},
+			{id: "orderDate", header: "Order Date", sort: "string", fillspace: 2, format: webix.i18n.dateFormatStr},
 			{id: "status", header: "Status", sort: "string", width: 100}
 		];
 
@@ -42,6 +42,7 @@ export default class HistoryView extends JetView {
 			view: "datatable",
 			id: "history:datatable",
 			columns: clmns,
+			autowidth: true,
 			rowHeight: 80,
 			on: {
 				onItemClick(id) {

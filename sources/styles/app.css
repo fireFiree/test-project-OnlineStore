@@ -3,6 +3,10 @@
     margin-top: 25px;
 }
 
+.chartLabel {
+	float:right;
+}
+
 .prodInfo {
     margin-top: 2px;
     margin-bottom: 2px;
@@ -31,12 +35,11 @@
     color: black;
 }
 
-
 .blueButton{
-    color: white;
+    color: white !important;
     background: #3498db;
     border:0px;
-    text-align: center;
+    text-align: center !important;
 }
 
 .shopCartIco{

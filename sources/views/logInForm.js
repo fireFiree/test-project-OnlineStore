@@ -1,5 +1,4 @@
 import {JetView} from "webix-jet";
-import {validate} from "./unloggedUser";
 
 export default class LogInForm extends JetView {
 	config() {
@@ -89,7 +88,7 @@ export default class LogInForm extends JetView {
 			],
 			rules: {
 				email: webix.rules.isEmail,
-				password(value) { return validate(value); }
+				password(value) { return value.trim() !== ""; }
 			}
 		};
 

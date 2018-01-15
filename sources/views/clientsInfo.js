@@ -16,9 +16,9 @@ export default class ClientsInfoView extends JetView {
 				labelWidth: 130
 			},
 			elements: [
-        		{template: "User's Form", type: "section"},
-        		{view: "text", label: "Name", name: "name", invalidMessage: "Name can't be Empty!"},
-        		{view: "text", label: "Email", name: "email", invalidMessage: "Email should be Email!"},
+				{template: "User's Form", type: "section"},
+				{view: "text", label: "Name", name: "name", invalidMessage: "Name can't be Empty!"},
+				{view: "text", label: "Email", name: "email", invalidMessage: "Email should be Email!"},
 				{view: "datepicker", label: "Registration Date", name: "registrationDate", format: webix.i18n.dateFormatStr},
 				{view: "checkbox", labelRight: "Admin", name: "isAdmin", checkValue: 1, uncheckedValue: 0},
        			{cols: [

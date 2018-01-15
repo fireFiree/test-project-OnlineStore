@@ -1,5 +1,21 @@
 import {JetView} from "webix-jet";
-import {validate} from "./unloggedUser";
+
+function checkSecurityLevel() {
+	let len = $$("passwordInput").getValue().length;
+	if (len < 5) {
+		return ["red", "battery-empty"];
+	}
+	else if (len < 10) {
+		return ["orange", "battery-half"];
+	}
+	return ["green", "battery-full"];
+}
+
+function displaySecurityLevel() {
+	let ico = checkSecurityLevel();
+	$$("passSecurityLevel").setHTML(`<span style='font-size:25px;
+	color: ${ico[0]}' class='webix_icon fa-${ico[1]}'></span>`);
+}
 
 export default class RegistrationForm extends JetView {
 	config() {
@@ -33,6 +49,7 @@ export default class RegistrationForm extends JetView {
 					bottomPadding: 15,
 					width: 700,
 					height: 40,
+					required: true,
 					invalidMessage: "Empty name field is not allowed"
 				},
 				{
@@ -50,6 +67,7 @@ export default class RegistrationForm extends JetView {
 					bottomPadding: 15,
 					width: 700,
 					height: 40,
+					required: true,
 					invalidMessage: "Invalid E-Mail"
 				},
 				{
@@ -62,21 +80,10 @@ export default class RegistrationForm extends JetView {
 					bottomPadding: 15,
 					width: 700,
 					height: 40,
+					required: true,
 					invalidMessage: "Empty password field is not allowed",
 					on: {
-						onTimedKeyPress() {
-							let len = $$("passwordInput").getValue().length;
-							if (len < 5) {
-								webix.message("malovato");
-							}
-							else if (len < 10) {
-								webix.message("vse esche malo");
-							}
-							else {
-								$$("regBtn").enable();
-								webix.message("vot teper horosh");
-							}
-						}
+						onTimedKeyPress: displaySecurityLevel
 					}
 				},
 				{
@@ -88,7 +95,8 @@ export default class RegistrationForm extends JetView {
 					bottomPadding: 15,
 					width: 700,
 					height: 40,
-					invalidMessage: "Password wasn`t confirmed"
+					invalidMessage: "Password wasn`t confirmed",
+					required: true
 				},
 				{
 					cols: [
@@ -99,26 +107,27 @@ export default class RegistrationForm extends JetView {
 							width: 100,
 							label: "Register",
 							click() {
+								$$("regForm").clearValidation();
 								if ($$("regForm").validate()) {
 									this.$scope.app.callEvent("onRegistration", [$$("regForm").getValues()]);
 								}
 							}
 						},
-						{}
+						{
+							view: "template",
+							id: "passSecurityLevel",
+							borderless: true
+						}
 					]
 				}
 			],
 			rules: {
-				name(value) { return validate(value); },
-				email: webix.rules.isEmail,
-				password(value) { return validate(value); },
+				name(value) { return value.trim() !== ""; },
+				email(value) { return webix.rules.isEmail(value); },
+				password(value) { return value.trim() !== ""; },
 				confPass(value) { return value === $$("passwordInput").getValue(); }
 			}
 		};
 		return form;
-	}
-
-	init() {
-		$$("regBtn").disable();
 	}
 }

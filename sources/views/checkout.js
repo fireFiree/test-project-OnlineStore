@@ -52,11 +52,10 @@ export default class CheckoutView extends JetView {
 			let options = [];
 			bag.data.each(
 				(obj) => {
-					options.push(
-						{
-							product: obj.name,
-							amount: obj.amountCounter
-						});
+					options.push({
+						product: obj.name,
+						amount: obj.amountCounter
+					});
 				}
 			);
 			item.options = options;

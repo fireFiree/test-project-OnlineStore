@@ -73,16 +73,6 @@ export default class BagView extends JetView {
 	init() {
 		const table = $$("bagTable");
 		table.parse(bag);
-		if (!$$("bagTable").count()) {
-			webix.alert({
-				title: "Error",
-				type: "alert-error",
-				text: "Your bag is empty.",
-				callback: () => {
-					this.show("/top/phones");
-				}
-			});
-		}
 
 		this.on(this.app, "onTotalChange", () => {
 			let sum = 0;
