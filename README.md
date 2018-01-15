@@ -1,31 +1,42 @@
-Webix Jet Demo App
-===================
+# Cellphones online store
 
-### How to run
+Online store with the list of available phones. Contains orders history, information about recent users, provides an opportunity for adding phones of selected amount into your bag, calculating total cost of your bag`s content, filling order details, new user registration and etc.
 
-- run ```npm install```
-- run ```npm start```
-- open ```http://localhost:8080```
+## Getting Started
 
-For more details, check https://www.gitbook.com/book/webix/webix-jet/details
+### Prerequisites
 
-### Other commands
+This project have dependencies that require [NodeJS](https://nodejs.org/en/) together with [NPM](https://www.npmjs.com/).
 
-#### Run lint
+### Installing
 
-```
-npm run lint
-```
-
-#### Build production files
+After downloading you should install node modules:
 
 ```
-npm run build
+npm install
 ```
 
-After that you can copy the "codebase" folder to the production server
+#### Client startup
 
+```
+npm run client
+```
 
-### License
+#### Server startup
 
-MIT
+```
+cd server
+npm run server
+```
+
+After you can open http://localhost:8080 in browser.
+## Built With
+* [Webix UI](https://webix.com/) - JavaScript UI Library for Speeding up Web Development
+* [Webix Jet](https://webix.com/webixjet/) - Webix Jet is a micro framework for SPA on top of Webix UI
+* [NodeJS](https://nodejs.org/en/) - JavaScript runtime
+* [Express](https://expressjs.com/) - Web application framework for Node.js for building web applications and APIs
+
+## Authors
+
+* **Nikita Romanchuk** - [GONE4EVER](https://github.com/GONE4EVER)
+* **Evgeniy Suleyko** - [FireFiree](https://github.com/fireFiree)
