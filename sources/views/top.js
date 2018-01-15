@@ -2,14 +2,6 @@ import {JetView} from "webix-jet";
 import {categories} from "../models/categories";
 import {bag} from "../models/bag";
 
-function templateList(obj) {
-	if (obj == null) {
-		return "<p>Bag is Empty</p>";
-	}
-
-	return "#name# x #amount# = #sum#";
-}
-
 export default class TopView extends JetView {
 	config() {
 		const header = {
