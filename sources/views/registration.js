@@ -43,6 +43,6 @@ export default class LogInView extends JetView {
 		currDate = webix.Date.datePart(currDate);
 		value.registrationDate = currDate;
 		users.add(value);
-		authorize.call(this);
+		authorize.call(this, Object.assign({isAdmin: false}, value));
 	}
 }

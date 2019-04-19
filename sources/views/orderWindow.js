@@ -9,18 +9,22 @@ export default class OrdersWindowView extends JetView {
 				labelWidth: 150
 			},
 			elements: [
-				{view: "richselect",
+				{
+					view: "richselect",
 					label: "Status",
 					name: "status",
 					options: ["In Process", "Declined"],
-					on: {onChange() {
-						if (this.getValue() === "Declined") {
-							$$("declineReason").show();
+					on: {
+						onChange() {
+							if (this.getValue() === "Declined") {
+								$$("declineReason").show();
+							}
+							else {
+								$$("declineReason").hide();
+							}
 						}
-						else {
-							$$("declineReason").hide();
-						}
-					}}},
+					}
+				},
 				{view: "textarea", id: "declineReason", label: "Decline Reason", name: "declineReason", hidden: true, placeholder: "Type The Reason", invalidMessage: "Reason can't be Empty"},
 				{view: "button", value: "Save", click() { this.$scope.saveForm(); }}
 			],

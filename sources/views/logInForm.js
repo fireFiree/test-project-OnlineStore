@@ -53,16 +53,16 @@ export default class LogInForm extends JetView {
 					height: 50
 				},
 				{
-					id: "emailInput",
-					type: "email",
-					name: "email",
+					id: "nameInput",
+					type: "name",
+					name: "name",
 					view: "text",
-					label: "<div class = 'name'><b>E-mail Address</b></div>",
+					label: "<div class = 'name'><b>Name</b></div>",
 					labelWidth: 200,
 					bottomPadding: 15,
 					width: 600,
 					height: 40,
-					invalidMessage: "Invalid E-Mail"
+					invalidMessage: "Invalid name"
 				},
 				{
 					id: "passwordInput",
@@ -87,7 +87,7 @@ export default class LogInForm extends JetView {
 				}
 			],
 			rules: {
-				email: webix.rules.isEmail,
+				name(value) { return value.trim() !== ""; },
 				password(value) { return value.trim() !== ""; }
 			}
 		};

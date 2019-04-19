@@ -1,0 +1,72 @@
+const fs = require("fs");
+
+const express = require("express");
+
+const router = express.Router();
+
+const serverConfig = require("../serverConfig.js");
+
+const FILE_PATH = `${serverConfig.SERVER_PATH}login/login.json`;
+
+
+function getCurrUser(req, res) {
+	const content = fs.readFileSync(FILE_PATH, "utf8");
+	const currUser = JSON.parse(content);
+	res.send(currUser);
+}
+
+function setCurrUser(req, res) {
+	if (!req.body) return res.sendStatus(400);
+
+	const name = req.body.name || "";
+	const email = req.body.email || "";
+	const registationDate = req.body.registationDate || new Date();
+	const password = req.body.password || "";
+
+	let user = {name,
+		email,
+		registationDate,
+		password,
+		isAdmin: false
+	};
+
+	let data = fs.readFileSync(FILE_PATH, "utf8");
+	let users = JSON.parse(data);
+	let id = users.length ? Math.max(...users.map(o => o.id)) + 1 : 1;
+
+	user.id = id;
+	users.push(user);
+	fs.writeFileSync(FILE_PATH, JSON.stringify(users));
+	res.send(user);
+}
+
+
+function removeCurrUser(req, res) {
+	const id = req.params.id;
+	let data = fs.readFileSync(FILE_PATH, "utf8");
+	let users = JSON.parse(data);
+	let index = -1;
+
+	for (let i = 0; i < users.length; i++) {
+		if (users[i].id == id) {
+			index = i;
+			break;
+		}
+	}
+	if (index > -1) {
+		let user = users.splice(index, 1)[0];
+
+		fs.writeFileSync(FILE_PATH, JSON.stringify(users));
+		res.send(user);
+	}
+	else {
+		res.status(404).send();
+	}
+}
+
+
+router.get("/", getCurrUser);
+router.post("/", setCurrUser);
+router.delete("/", removeCurrUser);
+
+module.exports = router;

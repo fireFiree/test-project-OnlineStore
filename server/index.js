@@ -22,6 +22,7 @@ app.all("/*", (req, res, next) => {
 app.use("/api/phones", phones);
 app.use("/api/orders", orders);
 app.use("/api/users", users);
+/* app.use("/api/login", login); */
 
 app.post("/upload", (req, res) => {
 	if (!req.files) return res.send({status: "error"});

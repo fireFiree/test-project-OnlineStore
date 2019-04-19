@@ -2,6 +2,15 @@ import {JetView} from "webix-jet";
 import {orders} from "../models/orders";
 import OrdersWindowView from "../views/orderWindow";
 
+const overlayTemplate = `
+<h1>
+	Ooops....
+	<br/>
+	Seems that you haven't made any orders yet :(
+</h1>
+`;
+
+
 export default class OrdersView extends JetView {
 	config() {
 		const clmns = [
@@ -42,11 +51,18 @@ export default class OrdersView extends JetView {
 			autoWidth: true,
 			on: {
 				onItemClick(id) {
-					let item = this.getItem(id);
-					this.$scope.win.show(item);
+					if (JSON.parse(localStorage.getItem("currUser")).isAdmin) {
+						let item = this.getItem(id);
+						this.$scope.win.show(item);
+					}
 				},
-				"data->onStoreLoad": function(){
+				"data->onStoreLoad": function () {
 					this.adjustRowHeight();
+				},
+				onAfterLoad() {
+					if (!this.data.order.length) {
+						this.showOverlay(overlayTemplate);
+					}
 				}
 			}
 		};
@@ -54,7 +70,24 @@ export default class OrdersView extends JetView {
 		return ordersTable;
 	}
 	init(view) {
-		view.parse(orders);
+		webix.extend($$("orders:datatable"), webix.OverlayBox);
+		webix.extend($$("orders:datatable"), webix.ProgressBar);
+		$$("orders:datatable").showProgress({
+			type: "icon"
+		});
+
+		setTimeout(() => {
+			view.parse(
+				currUser.isAdmin
+					? orders
+					: Object.values(orders.data.pull).filter(obj => obj.buyerEmail === currUser.email));
+
+			$$("orders:datatable").hideProgress();
+		}, 2000);
+
+		const currUser = JSON.parse(localStorage.getItem("currUser"));
+
+
 		this.win = this.ui(OrdersWindowView);
 	}
 }

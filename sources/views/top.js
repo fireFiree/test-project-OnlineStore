@@ -2,6 +2,7 @@ import {JetView} from "webix-jet";
 import {categories} from "../models/categories";
 import {bag} from "../models/bag";
 
+
 export default class TopView extends JetView {
 	config() {
 		const header = {
@@ -10,15 +11,16 @@ export default class TopView extends JetView {
 			height: 50,
 			css: {background: "#3498db"},
 			elements: [
-				{view: "template", template: "<a route='/top/phones'>VarinShop</a>", type: "header", borderless: true},
-				{view: "template", template: "Hi, varyas!", type: "header", borderless: true},
-				{css: "blueButton", view: "button", type: "icon", icon: "area-chart ", id: "stats", label: "Statistics", borderless: true, width: 100, click() { this.$scope.showStats(); }},
-				{css: "blueButton", view: "button", type: "icon", icon: "sign-out", id: "logout", label: "Logout", borderless: true, width: 100, click() { this.$scope.logOut(); }},
-				{css: "blueButton", view: "button", type: "icon", icon: "history ", id: "history", label: "History", borderless: true, width: 100, click() { this.$scope.showHistory(); }},
-				{css: "blueButton", view: "button", type: "icon", icon: "shopping-bag", id: "bag", label: "Bag", borderless: true, width: 100, click() { this.$scope.showBag(); }}
+				{view: "template", template: "<a style='family-name: comic-sans; font-size: 28px;' route='/top/phones'>KOMMUNARU$HKA</a>", type: "header", borderless: true},
+				{css: "blueButton", view: "button", type: "icon", icon: "area-chart ", hidden: !JSON.parse(localStorage.getItem("currUser")).isAdmin, id: "stats", label: "Statistics", borderless: true, width: 90, click() { this.$scope.showStats(); }},
+				{css: "blueButton", view: "button", type: "icon", icon: "history ", id: "history", label: "History", borderless: true, width: 80, click() { this.$scope.showHistory(); }},
+				{css: "blueButton", view: "button", type: "icon", icon: "shopping-bag", id: "bag", label: "Bag", borderless: true, width: 65, click() { this.$scope.showBag(); }},
+				{css: "blueButton", view: "button", type: "icon", icon: "download", hidden: !JSON.parse(localStorage.getItem("currUser")).isAdmin, id: "export", label: "Export", borderless: true, width: 80, click() { webix.toExcel($$("orders:datatable")); }},
+				{css: "blueButton", view: "button", type: "icon", icon: "sign-out", id: "logout", label: "Log Out", borderless: true, width: 85, click() { this.$scope.logOut(); }}
 			]
 		};
 		let adminMenu = {
+			hidden: !JSON.parse(localStorage.getItem("currUser")).isAdmin,
 			view: "list",
 			id: "top:menu",
 			layout: "y",
@@ -85,6 +87,7 @@ export default class TopView extends JetView {
 		}
 	}
 	logOut() {
+		localStorage.removeItem("currUser");
 		this.show("../unloggedUser/logIn");
 	}
 	showHistory() {

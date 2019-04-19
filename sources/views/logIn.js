@@ -26,9 +26,9 @@ export default class LogInView extends JetView {
 	}
 
 	authenticate(val) {
-		let userData = users.find(obj => obj.email === val.email && obj.password === val.password);
-		if (userData.length) {
-			authorize.call(this);
+		let userData = users.find(obj => obj.name === val.name && obj.password === val.password)[0];
+		if (userData) {
+			authorize.call(this, userData);
 		}
 		else {
 			webix.alert({
@@ -36,7 +36,7 @@ export default class LogInView extends JetView {
 				type: "alert-error",
 				text: "Wrong E-Mail or Password",
 				callback: () => {
-					$$("emailInput").focus();
+					$$("nameInput").focus();
 				}
 			});
 		}

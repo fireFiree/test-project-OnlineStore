@@ -6,7 +6,7 @@ webix.ready(() => {
 	webix.i18n.setLocale();
 	let app = new JetApp({
 		id:	APPNAME,
-		version:	VERSION,
+		version: VERSION,
 		start:	"/top/phones"
 	});
 	app.render();
