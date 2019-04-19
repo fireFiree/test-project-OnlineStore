@@ -50,8 +50,8 @@ export default class TopView extends JetView {
 			select: true,
 			maxWidth: 400,
 			on: {
-				onAfterSelect: function () {
-					this.$scope.app.callEvent("categoryFiltering");
+				onAfterSelect: function (id) {
+					this.$scope.app.callEvent("categoryFiltering", [this.getItem(id)]);
 				}
 			}
 		};

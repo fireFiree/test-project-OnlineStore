@@ -69,9 +69,21 @@ export default class PhonesView extends JetView {
 			this.unblockEvent();
 		});
 
-		this.on(this.app, "categoryFiltering", () => {
+		this.on(this.app, "categoryFiltering", (selectedItem) => {
 			let table = $$("phonesTable");
-			table.filterByAll();
+			debugger;
+
+			if (selectedItem.id === 'root') {
+				table.filter();
+				return;
+			}
+
+			table.filter(obj => {
+				if (selectedItem.type) {
+					return obj.category.indexOf(selectedItem.value) !== -1;
+				}
+				return obj.name.indexOf(selectedItem.value) !== -1;
+			});
 		});
 	}
 
