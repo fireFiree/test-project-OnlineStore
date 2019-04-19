@@ -7,7 +7,7 @@ webix.ready(() => {
 	let app = new JetApp({
 		id:	APPNAME,
 		version: VERSION,
-		start:	"/top/phones"
+		start:	"/unloggedUser/logIn"
 	});
 	app.render();
 

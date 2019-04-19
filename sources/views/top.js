@@ -5,6 +5,13 @@ import {bag} from "../models/bag";
 
 export default class TopView extends JetView {
 	config() {
+		if (!JSON.parse(localStorage.getItem("currUser"))) {
+			console.log(this);
+
+			this.show("./unloggedUser/logIn");
+			return;
+		}
+
 		const header = {
 			id: "header",
 			view: "toolbar",
