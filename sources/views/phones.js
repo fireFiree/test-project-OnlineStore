@@ -93,25 +93,26 @@ export default class PhonesView extends JetView {
 		if (typeof item.amountCounter == "undefined") {
 			item.amountCounter = 0;
 		}
+		debugger
 
-		if (!bag.exists(item.id) && item.amountCounter !== 0) {
+		if (!bag.exists(item.id) && Number.isInteger(item.amountCounter) && item.amountCounter> 0) {
 			item.sum = item.amountCounter * item.price;
 			bag.add(webix.copy(item));
-			$$("counter").setValue(0);
 		}
-		else if (item.amountCounter !== 0) {
+		else if (Number.isInteger(item.amountCounter) && item.amountCounter> 0) {
 			let dataItem = bag.getItem(id);
 			dataItem.amountCounter += item.amountCounter;
 			dataItem.sum = dataItem.amountCounter * dataItem.price;
-			$$("counter").setValue(0);
 		}
 		else {
 			webix.alert({
 				title: "Warning",
 				type: "alert-warning",
-				text: "The amount of items you are trying to add to your bag is zero"
+				text: "The amount of items you are trying to add to your bag is invalid"
 			});
 		}
+		$$("counter").setValue(0);
+
 		return item.amountCounter;
 	}
 	afterFilter() {

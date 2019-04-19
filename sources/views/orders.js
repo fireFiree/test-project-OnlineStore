@@ -35,8 +35,8 @@ export default class OrdersView extends JetView {
 			{id: "buyerName", header: ["BuyerName", {content: "textFilter"}], width: 120},
 			{id: "buyerEmail", header: "BuyerEmail", fillspace: 2, minWidth: 100},
 			{id: "address", header: "Address", sort: "string", fillspace: 2, minWidth: 100},
-			{id: "delivery", header: "Delivery", sort: "string", width: 120},
-			{id: "payment", header: "Payment", sort: "string", width: 100},
+			{id: "deliveryType", header: "Delivery type", sort: "string", width: 120},
+			{id: "paymentType", header: "Payment", sort: "string", width: 100},
 			{id: "orderDate", header: "Order Date", sort: "string", width: 120, format: webix.i18n.dateFormatStr},
 			{id: "status", header: "Status", sort: "string", width: 100}
 		];
